@@ -1,5 +1,5 @@
 {
-	"name": "graphprotocol-utils",
+	"name": "@amxx/graphprotocol-utils",
 	"version": "0.0.1",
 	"description": "Tooling for graphprotocol subgraph construction",
 	"author": "Hadrien Croubois (@Amxx)",

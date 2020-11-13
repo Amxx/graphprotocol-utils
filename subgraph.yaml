@@ -1,6 +1,6 @@
 specVersion: 0.0.2
-description: GasStation
-repository: https://github.com/Amxx/GasStation-subgraph
+description: graphprotocol-utils
+repository: https://github.com/Amxx/graphprotocol-utils
 schema:
   file: ./schema.graphql
 dataSources:
