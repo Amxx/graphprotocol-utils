@@ -1,12 +1,13 @@
 {
 	"name": "@amxx/graphprotocol-utils",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Tooling for graphprotocol subgraph construction",
 	"author": "Hadrien Croubois (@Amxx)",
 	"license": "MIT",
-	"main": "src/index.js",
+	"main": "index.ts",
 	"files": [
 		"src",
+		"index.ts",
 		"schema.graphql"
 	],
 	"scripts": {
