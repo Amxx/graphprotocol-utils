@@ -1,7 +1,7 @@
-// import { String } from './string';
-// import { StringArray } from './stringarray';
+import { String      as _String      } from './string';
+import { StringArray as _StringArray } from './stringarray';
 
 export namespace persistent {
-	// export String
-	// export StringArray
+	export class String      extends _String {}
+	export class StringArray extends _StringArray {}
 };
