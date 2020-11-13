@@ -1,0 +1,4 @@
+type PersistentString @entity {
+	id:                           ID!
+	value:                        String!
+}

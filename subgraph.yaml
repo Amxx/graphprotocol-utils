@@ -1,0 +1,26 @@
+specVersion: 0.0.2
+description: GasStation
+repository: https://github.com/Amxx/GasStation-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - name: GenericFactory
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: '0xfac000a12da42b871c0aad5f25391aae62958db1'
+      startBlock: 9665920
+      abi: GenericFactory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Transaction
+      abis:
+        - name: GenericFactory
+          file: ./testing/GenericFactory.json
+      eventHandlers:
+        - event: NewContract(indexed address)
+          handler: handleNewContract
+      file: ./testing/mapping.ts

@@ -1,0 +1,5 @@
+interface Event {
+	id:                           ID!
+	transaction:                  Transaction!
+	timestamp:                    BigInt!
+}
