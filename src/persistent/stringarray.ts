@@ -68,6 +68,6 @@ export class StringArray {
 	}
 
 	static del(id: string): void {
-		store.remove('StringBuffer', id)
+		store.remove('PersistentStringArray', id)
 	}
 }

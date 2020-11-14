@@ -24,4 +24,12 @@ export function handleNewContract(ev: NewContractEvent): void {
 	persistent.stringarray.pushBack("Key", "Value1")
 	persistent.stringarray.pushFront("Key", "Value2")
 	persistent.stringarray.pushBack("Key", "Value3")
+
+	let s = new persistent.STRING("OtherKey")
+	s.set("OtherValue")
+
+	let sa = new persistent.STRINGARRAY("OtherKey")
+	sa.pushBack("Value1")
+	sa.pushFront("Value2")
+	sa.pushBack("Value3")
 }
