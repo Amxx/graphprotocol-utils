@@ -10,6 +10,7 @@ import {
 	constants,
 	decimals,
 	event,
+	integers,
 	persistent,
 	transaction,
 } from '../src'
@@ -19,6 +20,10 @@ export function handleNewContract(ev: NewContractEvent): void {
 	let id: string         = event.id(ev);
 	let fees               = decimals.toDecimals(ev.transaction.gasPrice*ev.transaction.gasUsed)
 	log.warning("tx: {}, id: {}, fees: {}", [ tx.id, id, fees.toString() ])
+
+	let i = constants.BIGINT_ONE
+	i = integers.increment(i)
+	i = integers.decrement(i)
 
 	persistent.string.set("Key", "Value")
 	persistent.stringarray.pushBack("Key", "Value1")
