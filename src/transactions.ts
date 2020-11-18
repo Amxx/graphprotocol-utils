@@ -6,7 +6,7 @@ import {
 	Transaction,
 } from '../generated/schema'
 
-export namespace transaction {
+export namespace transactions {
 	export function log(event: ethereum.Event): Transaction {
 		let tx = new Transaction(event.transaction.hash.toHex())
 		tx.timestamp   = event.block.timestamp

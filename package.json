@@ -12,7 +12,7 @@
 		"schema.graphql"
 	],
 	"scripts": {
-		"build:schema": "find src -name '*.gql' -exec cat {} + > schema.graphql",
+		"build:schema": "concat -o schema.graphql src/*.gql src/**/*.gql",
 		"build:codegen": "graph codegen subgraph.yaml",
 		"build": "yarn build:schema && yarn build:codegen"
 	},
@@ -20,6 +20,7 @@
 		"@graphprotocol/graph-ts": "^0.19.0"
 	},
 	"devDependencies": {
-		"@graphprotocol/graph-cli": "^0.19.0"
+		"@graphprotocol/graph-cli": "^0.19.0",
+		"concat": "^1.0.3"
 	}
 }

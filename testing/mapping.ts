@@ -9,21 +9,24 @@ import {
 import {
 	constants,
 	decimals,
-	event,
+	events,
 	integers,
 	persistent,
-	transaction,
+	transactions,
 } from '../src'
 
 export function handleNewContract(ev: NewContractEvent): void {
-	let tx: transaction.Tx = transaction.log(ev);
-	let id: string         = event.id(ev);
-	let fees               = decimals.toDecimals(ev.transaction.gasPrice*ev.transaction.gasUsed)
+	let tx   = transactions.log(ev);
+	let id   = events.id(ev);
+	let fees = decimals.toDecimals(ev.transaction.gasPrice*ev.transaction.gasUsed)
 	log.warning("tx: {}, id: {}, fees: {}", [ tx.id, id, fees.toString() ])
 
 	let i = constants.BIGINT_ONE
 	i = integers.increment(i)
 	i = integers.decrement(i)
+
+	let d = new decimals.Value("mydecimalvalue", 9)
+	d.increment(constants.BIGINT_ONE)
 
 	persistent.string.set("Key", "Value")
 	persistent.stringarray.pushBack("Key", "Value1")
