@@ -6,6 +6,6 @@ export namespace integers {
 		return num.plus(amount)
 	}
 	export function decrement(num: BigInt, amount: BigInt = constants.BIGINT_ONE): BigInt {
-		return num.plus(amount)
+		return num.minus(amount)
 	}
 }
