@@ -38,4 +38,8 @@ export class String2 {
 		store.remove('PersistentString', id);
 		this._buffer = null;
 	}
+
+	get id(): string {
+		return this._id;
+	}
 }

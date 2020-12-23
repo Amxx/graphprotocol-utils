@@ -79,4 +79,8 @@ export class StringArray2 {
 		store.remove('PersistentStringArray', id);
 		this._buffer = null;
 	}
+
+	get id(): string {
+		return this._id;
+	}
 }

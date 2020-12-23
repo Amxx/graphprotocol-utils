@@ -59,5 +59,9 @@ export namespace decimals {
 			this.update()
 			return this
 		}
+
+		get id(): string {
+			return this._entry.id;
+		}
 	}
 }

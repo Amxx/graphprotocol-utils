@@ -27,6 +27,7 @@ export function handleNewContract(ev: NewContractEvent): void {
 
 	let d = new decimals.Value("mydecimalvalue", 9)
 	d.increment(constants.BIGINT_ONE)
+	let did = d.id
 
 	persistent.string.set("Key", "Value")
 	persistent.stringarray.pushBack("Key", "Value1")
@@ -35,9 +36,11 @@ export function handleNewContract(ev: NewContractEvent): void {
 
 	let s = new persistent.STRING("OtherKey")
 	s.set("OtherValue")
+	let sid = s.id
 
 	let sa = new persistent.STRINGARRAY("OtherKey")
 	sa.pushBack("Value1")
 	sa.pushFront("Value2")
 	sa.pushBack("Value3")
+	let said = sa.id
 }
