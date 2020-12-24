@@ -1,7 +1,8 @@
 type Transaction @entity {
 	id:                           ID!
+	block:                        Block!
 	timestamp:                    BigInt!
-	blockNumber:                  BigInt!
+	index:                        BigInt!
 	from:                         Address!
 	events:                       [Event!]! @derivedFrom(field: "transaction")
 }

@@ -14,7 +14,8 @@
 	"scripts": {
 		"build:schema": "concat -o schema.graphql src/*.gql src/**/*.gql",
 		"build:codegen": "graph codegen subgraph.yaml",
-		"build": "yarn build:schema && yarn build:codegen"
+		"build:compile": "graph build subgraph.yaml",
+		"build:*": "yarn build:schema && yarn build:codegen && yarn build:compile"
 	},
 	"dependencies": {
 		"@graphprotocol/graph-ts": "^0.19.0"

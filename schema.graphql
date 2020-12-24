@@ -3,6 +3,13 @@ type Address @entity {
 	transactions:                 [Transaction!]! @derivedFrom(field: "from")
 }
 
+type Block @entity {
+	id:                           ID!
+	number:                       BigInt!
+	timestamp:                    BigInt!
+	transactions:                 [Transaction!]! @derivedFrom(field: "block")
+}
+
 type DecimalValue @entity {
 	id:                           ID!
 	value:                        BigDecimal!
@@ -18,8 +25,9 @@ interface Event {
 
 type Transaction @entity {
 	id:                           ID!
+	block:                        Block!
 	timestamp:                    BigInt!
-	blockNumber:                  BigInt!
+	index:                        BigInt!
 	from:                         Address!
 	events:                       [Event!]! @derivedFrom(field: "transaction")
 }

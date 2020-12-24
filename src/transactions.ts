@@ -1,22 +1,16 @@
-import {
-	ethereum,
-} from '@graphprotocol/graph-ts'
-
-import {
-	Transaction,
-	TransactionSender,
-} from '../generated/schema'
+import { ethereum                         } from '@graphprotocol/graph-ts'
+import { addresses                        } from './addresses'
+import { blocks                           } from './blocks'
+import { Transaction as TransactionEntity } from '../generated/schema'
 
 export namespace transactions {
-	export function log(event: ethereum.Event): Transaction {
-		let from = new TransactionSender(event.transaction.from.toHex())
-		from.save()
-		let tx = new Transaction(event.transaction.hash.toHex())
-		tx.timestamp   = event.block.timestamp
-		tx.blockNumber = event.block.number
-		tx.from        = from.id
-		tx.save()
-		return tx as Transaction
+	export function log(event: ethereum.Event): TransactionEntity {
+		let entity       = new TransactionEntity(event.transaction.hash.toHex())
+		entity.timestamp = event.block.timestamp
+		entity.block     = blocks.log(event.block).id
+		entity.from      = addresses.log(event.transaction.from).id
+		entity.save()
+		return entity as TransactionEntity
 	}
-	export type Tx = Transaction
+	export type Transaction = TransactionEntity
 }
