@@ -1,0 +1,4 @@
+type Address @entity {
+	id:                           ID!
+	transactions:                 [Transaction!]! @derivedFrom(field: "from")
+}

@@ -1,3 +1,8 @@
+type Address @entity {
+	id:                           ID!
+	transactions:                 [Transaction!]! @derivedFrom(field: "from")
+}
+
 type DecimalValue @entity {
 	id:                           ID!
 	value:                        BigDecimal!
@@ -15,6 +20,7 @@ type Transaction @entity {
 	id:                           ID!
 	timestamp:                    BigInt!
 	blockNumber:                  BigInt!
+	from:                         Address!
 	events:                       [Event!]! @derivedFrom(field: "transaction")
 }
 
