@@ -11,14 +11,4 @@ export namespace erc165 {
 		))
 		return result != null && (result as Array<ethereum.Value>)[0].toBoolean() == expected
 	}
-	// export function supportsInterface(address: Address, interfaceId: String, expected: boolean = true): boolean {
-	// 	let result = ethereum.call(new ethereum.SmartContractCall(
-	// 		'', // contract name
-	// 		address,
-	// 		'', // function name
-	// 		'supportsInterface(bytes4):(bool)',
-	// 		[ethereum.Value.fromFixedBytes(Bytes.fromHexString(interfaceId) as Bytes)]
-	// 	))
-	// 	return result != null && (result as Array<ethereum.Value>)[0].toBoolean() == expected
-	// }
 }
