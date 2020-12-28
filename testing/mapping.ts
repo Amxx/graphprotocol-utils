@@ -19,8 +19,9 @@ import {
 } from '../src'
 
 export function handleNewContract(ev: NewContractEvent): void {
-	let isERC165 = erc165.supportsInterface(ev.address, "01ffc9a7")
-	log.warning("supports {}: {}", [ "01ffc9a7", isERC165.toString() ])
+	// TODO:
+	// let isERC165 = erc165.supportsInterface(GenericFactory.bind(ev.address), "01ffc9a7")
+	// log.warning("supports {}: {}", [ "01ffc9a7", isERC165.toString() ])
 
 	let tx   = transactions.log(ev);
 	let id   = events.id(ev);
