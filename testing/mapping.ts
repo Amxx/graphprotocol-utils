@@ -4,6 +4,7 @@ import {
 } from '@graphprotocol/graph-ts'
 
 import {
+	GenericFactory,
 	NewContract as NewContractEvent
 } from '../generated/GenericFactory/GenericFactory'
 
