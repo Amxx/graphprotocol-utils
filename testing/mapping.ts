@@ -1,4 +1,5 @@
 import {
+	ethereum,
 	log,
 } from '@graphprotocol/graph-ts'
 
@@ -7,15 +8,19 @@ import {
 } from '../generated/GenericFactory/GenericFactory'
 
 import {
+	persistent,
+	erc165,
 	constants,
 	decimals,
 	events,
 	integers,
-	persistent,
 	transactions,
 } from '../src'
 
 export function handleNewContract(ev: NewContractEvent): void {
+	let isERC165 = erc165.supportsInterface(ev.address, "01ffc9a7")
+	log.warning("supports {}: {}", [ "01ffc9a7", isERC165.toString() ])
+
 	let tx   = transactions.log(ev);
 	let id   = events.id(ev);
 	let fees = decimals.toDecimals(ev.transaction.gasPrice*ev.transaction.gasUsed)
