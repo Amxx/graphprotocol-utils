@@ -1,6 +1,6 @@
 {
 	"name": "@amxx/graphprotocol-utils",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "Tooling for graphprotocol subgraph construction",
 	"author": "Hadrien Croubois (@Amxx)",
 	"license": "MIT",

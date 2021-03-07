@@ -31,37 +31,49 @@ export namespace decimals {
 				this._entry          = new DecimalValue(id)
 				this._entry.exact    = constants.BIGINT_ZERO
 				this._entry.decimals = decimal
-				this.update()
+				this._update()
 			} else {
 				this._entry = entry as DecimalValue
 			}
 		}
 
-		update() : void {
-			this._entry.value = decimals.toDecimals(this._entry.exact, this._entry.decimals)
-			this._entry.save()
+		get id(): string {
+			return this._entry.id;
+		}
+
+		get exact() : BigInt {
+			return this._entry.exact;
+		}
+
+		get value() : BigDecimal {
+			return this._entry.value;
+		}
+
+		get decimals() : i32 {
+			return this._entry.decimals;
 		}
 
 		set(exact: BigInt): Value {
 			this._entry.exact = exact
-			this.update()
+			this._update()
 			return this
 		}
 
 		increment(delta: BigInt): Value {
 			this._entry.exact = integers.increment(this._entry.exact, delta)
-			this.update()
+			this._update()
 			return this
 		}
 
 		decrement(delta: BigInt): Value {
 			this._entry.exact = integers.decrement(this._entry.exact, delta)
-			this.update()
+			this._update()
 			return this
 		}
 
-		get id(): string {
-			return this._entry.id;
+		_update() : void {
+			this._entry.value = decimals.toDecimals(this._entry.exact, this._entry.decimals)
+			this._entry.save()
 		}
 	}
 }
