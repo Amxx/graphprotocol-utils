@@ -1,20 +1,22 @@
 {
 	"name": "@amxx/graphprotocol-utils",
-	"version": "0.0.9",
+	"version": "0.1.0",
 	"description": "Tooling for graphprotocol subgraph construction",
 	"author": "Hadrien Croubois (@Amxx)",
 	"license": "MIT",
 	"main": "index.ts",
 	"files": [
 		"generated/schema.ts",
+		"generated/schema.graphql",
 		"src",
-		"index.ts",
-		"schema.graphql"
+		"index.ts"
 	],
 	"scripts": {
-		"build:schema": "concat -o schema.graphql src/*.gql src/**/*.gql",
-		"build:codegen": "graph codegen subgraph.yaml",
-		"build": "yarn build:schema && yarn build:codegen"
+		"prepare:clean": "rimraf generated",
+		"prepare:folder":  "mkdir -p generated",
+		"prepare:generate": "concat -o generated/schema.graphql src/*.gql src/**/*.gql",
+		"prepare:compile": "graph codegen subgraph.yaml",
+		"prepare": "yarn prepare:clean && yarn prepare:folder && yarn prepare:generate && yarn prepare:compile"
 	},
 	"dependencies": {
 		"@graphprotocol/graph-ts": "^0.20.0"
