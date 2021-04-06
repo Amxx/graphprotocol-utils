@@ -37,6 +37,10 @@ export namespace decimals {
 			}
 		}
 
+		static fetch(id: string, decimal: i32 = decimals.DEFAULT_DECIMALS): Value {
+			return new Value(id, decimal)
+		}
+
 		get id(): string {
 			return this._entry.id;
 		}
