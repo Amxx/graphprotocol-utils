@@ -61,15 +61,16 @@ class Schema extends Array {
 }
 
 class SchemaEntry {
-  constructor({ name, fields = [], enums = [], parent = null }) {
+  constructor({ name, abstract = false, fields = [], enums = [], parent = null }) {
     assert(
       enums.length == 0 || fields.length == 0,
       `Error loading schema entry ${name}: Entry contains both enums and fields`,
     );
-    this.name   = name;
-    this.fields = fields.map(SchemaEntryField.from);
-    this.enums  = enums;
-    this.parent = parent;
+    this.name     = name;
+    this.abstract = abstract;
+    this.fields   = fields.map(SchemaEntryField.from);
+    this.enums    = enums;
+    this.parent   = parent;
 
     // add id field
     if (this.enums.length == 0 && !this.fields.find(({ name, type }) => name === 'id' && type === 'ID!')) {
@@ -80,11 +81,13 @@ class SchemaEntry {
   toString() {
     return [].concat(
       // entity header
-      this.enums.length == 0
-      ? this.parent
+      this.enums.length > 0
+      ? `enum ${this.name} {\n`
+      : this.abstract
+      ? `interface ${this.name} {\n`
+      : this.parent
       ? `type ${this.name} implements ${this.parent} @entity {\n`
-      : `type ${this.name} @entity {\n`
-      : `enum ${this.name} {\n`,
+      : `type ${this.name} @entity {\n`,
       // entities
       (
         this.enums.length == 0
