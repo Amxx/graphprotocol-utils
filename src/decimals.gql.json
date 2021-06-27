@@ -1,0 +1,8 @@
+[{
+  "name": "DecimalValue",
+  "fields": [
+    { "name": "value",    "type": "BigDecimal!" },
+    { "name": "exact",    "type": "BigInt!"     },
+    { "name": "decimals", "type": "Int!"        }
+  ]
+}]

@@ -1,4 +1,0 @@
-type PersistentStringArray @entity {
-	id:                           ID!
-	values:                       [String!]!
-}

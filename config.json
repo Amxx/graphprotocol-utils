@@ -1,0 +1,14 @@
+{
+  "output": "./generated/",
+  "datasources": [
+    {
+      "module": [
+        "./src/decimals",
+        "./src/events",
+        "./src/transactions",
+        "./src/persistent/string",
+        "./src/persistent/stringarray"
+      ]
+    }
+  ]
+}

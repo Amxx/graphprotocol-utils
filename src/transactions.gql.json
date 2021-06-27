@@ -1,0 +1,8 @@
+[{
+  "name": "Transaction",
+  "fields": [
+    { "name": "timestamp",   "type": "BigInt!"                          },
+    { "name": "blockNumber", "type": "BigInt!"                          },
+    { "name": "events",      "type": "Event!", "derived": "transaction" }
+  ]
+}]

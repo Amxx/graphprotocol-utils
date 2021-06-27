@@ -1,0 +1,7 @@
+[{
+  "name": "Event",
+  "fields": [
+    { "name": "transaction", "type": "Transaction!" },
+    { "name": "timestamp",   "type": "BigInt!"      }
+  ]
+}]
