@@ -4,8 +4,8 @@
 const fs   = require('fs');
 const path = require('path');
 const argv = require('yargs')
-  .string('path')
-  .option('common-type',     { type: 'string',  default: '@amxx/graphprotocol-utils/common/schema.js' })
+  .option('config',          { type: 'string',  required: true                                        })
+  .option('common-types',    { type: 'string',  default: '@amxx/graphprotocol-utils/common/schema.js' })
   .option('datasource-dir',  { type: 'string',  default: 'src/datasources'                            })
   .option('template-dir',    { type: 'string',  default: 'src/templates'                              })
   .option('export-schema',   { type: 'boolean', default: false                                        })
@@ -53,7 +53,7 @@ class Schema extends Array {
         .map(({ name }) => name)
         .unique()
         .map(entry => this.filter(({ name }) => name == entry).reduce(SchemaEntry.merge, {})),
-      (argv.commonType ? require(argv.commonType) : [])
+      (argv.commonTypes ? require(argv.commonTypes) : [])
         .filter(({ name }) => this.some(({ parent, fields }) => parent == name || fields.map(({ type }) => type.replace(/[\[\]\!]/, '')).includes(name)))
         .map(SchemaEntry.from),
     ));
@@ -249,7 +249,7 @@ class Config {
 }
 
 (async () => {
-  const config = new Config(argv.path);
+  const config = new Config(argv.config);
 
   if (argv.exportSchema) {
     const file = `${config.receipt.output}schema.graphql`;
