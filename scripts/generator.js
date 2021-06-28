@@ -6,8 +6,8 @@ const path = require('path');
 const argv = require('yargs')
   .string('path')
   .option('common-type',     { type: 'string',  default: '@amxx/graphprotocol-utils/common/schema.js' })
-  .option('datasource-dir',  { type: 'string',  default: ''                                           })
-  .option('template-dir',    { type: 'string',  default: ''                                           })
+  .option('datasource-dir',  { type: 'string',  default: 'src/datasources'                            })
+  .option('template-dir',    { type: 'string',  default: 'src/templates'                              })
   .option('export-schema',   { type: 'boolean', default: false                                        })
   .option('export-subgraph', { type: 'boolean', default: false                                        })
   .argv
