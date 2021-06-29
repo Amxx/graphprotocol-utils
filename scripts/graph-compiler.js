@@ -6,8 +6,9 @@ const path = require('path');
 const argv = require('yargs')
   .option('config',          { type: 'string',  required: true                                        })
   .option('common-types',    { type: 'string',  default: '@amxx/graphprotocol-utils/common/schema.js' })
-  .option('datasource-dir',  { type: 'string',  default: 'src/datasources'                            })
-  .option('template-dir',    { type: 'string',  default: 'src/templates'                              })
+  .option('nodemodules-dir', { type: 'string',  default: './node_modules'                             })
+  .option('datasources-dir', { type: 'string',  default: './src/datasources'                          })
+  .option('templates-dir',   { type: 'string',  default: './src/templates'                            })
   .option('export-schema',   { type: 'boolean', default: false                                        })
   .option('export-subgraph', { type: 'boolean', default: false                                        })
   .argv
@@ -167,10 +168,13 @@ class Subgraph {
   }
 
   toString() {
+    const datasourcesPath = path.relative(path.dirname(this.config.receipt.output), argv.datasourcesDir)
+    const nodemodulesPath = path.relative(path.dirname(this.config.receipt.output), argv.nodemodulesDir)
+
     const datasources = Object.fromEntries(
       this.config.modules().map(module => {
         try {
-          return [ module, readFile(path.resolve(argv.datasourceDir, `${module}.yaml`)) ]
+          return [ module, readFile(path.resolve(argv.datasourcesDir, `${module}.yaml`)) ]
         } catch {
           return undefined
         }
@@ -180,7 +184,7 @@ class Subgraph {
     const templates = Object.fromEntries(
       this.config.templates().map(template => {
         try {
-          return [ template, readFile(path.resolve(argv.templateDir, `${template}.yaml`)) ]
+          return [ template, readFile(path.resolve(argv.templatesDir, `${template}.yaml`)) ]
         } catch {
           return undefined
         }
@@ -197,9 +201,11 @@ class Subgraph {
         .flatMap(datasource => [].concat(datasource.module).map(module => Object.assign({}, datasource, { module })))
         .map((datasource, i, array) => Object.assign(
           {
-            id:         array.findIndex(({ module }) => module === datasource.module) === i ? datasource.module : `${datasource.module}-${i}`,
-            startBlock: this.config.receipt.startBlock || 0,
-            chain:      this.config.receipt.chain      || 'mainnet',
+            id:              array.findIndex(({ module }) => module === datasource.module) === i ? datasource.module : `${datasource.module}-${i}`,
+            startBlock:      this.config.receipt.startBlock || 0,
+            chain:           this.config.receipt.chain      || 'mainnet',
+            datasourcesPath,
+            nodemodulesPath,
           },
           datasource,
         ))
@@ -238,8 +244,8 @@ class Config {
 
   schema() {
     return Schema.from([].concat(
-      this.modules().flatMap(module => Schema.load(path.resolve(argv.datasourceDir, `${module}.gql.json`))),
-      this.templates().flatMap(template => Schema.load(path.resolve(argv.templateDir, `${template}.gql.json`))),
+      this.modules().flatMap(module => Schema.load(path.resolve(argv.datasourcesDir, `${module}.gql.json`))),
+      this.templates().flatMap(template => Schema.load(path.resolve(argv.templatesDir, `${template}.gql.json`))),
     )).sanitize();
   }
 

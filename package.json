@@ -1,6 +1,6 @@
 {
 	"name": "@amxx/graphprotocol-utils",
-	"version": "1.0.0-alpha.4",
+	"version": "1.0.0-alpha.5",
 	"description": "Tooling for graphprotocol subgraph construction",
 	"author": "Hadrien Croubois (@Amxx)",
 	"license": "MIT",
@@ -18,7 +18,7 @@
 	"scripts": {
 		"prepublish": "rimraf generated",
 		"prepare": "npm run prepare:schema && npm run prepare:codegen",
-		"prepare:schema": "scripts/graph-compiler.js --config config.json --datasource-dir src --no-common-types --export-schema",
+		"prepare:schema": "scripts/graph-compiler.js --config config.json --datasources-dir src --no-common-types --export-schema",
 		"prepare:codegen": "graph codegen testing/subgraph.yaml",
 		"test": "graph build testing/subgraph.yaml"
 	},
