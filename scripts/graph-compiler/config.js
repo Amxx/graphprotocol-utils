@@ -17,7 +17,7 @@ class Config {
   }
 
   datasources() {
-    return this._cfg.datasources.filter(({ address, module }) => address && (module || []).length);
+    return this._cfg.datasources;
   }
 
   templates() {
