@@ -40,6 +40,7 @@ class Subgraph {
           {
             id:   array.findIndex(({ module }) => module === datasource.module) === i ? datasource.module : `${datasource.module}-${i}`,
             root: relative('.'),
+            file: relative(modules[datasource.module].ts),
           },
           datasource,
         ))
@@ -47,8 +48,9 @@ class Subgraph {
           modules[datasource.module].template
             .replace(/\{(\w+)\}/g, (_, varname) => datasource[varname])
             .replace(/^.*undefined.*\n/mg, ''),
-          `      file: ${relative(modules[datasource.module].ts)}\n`,
-        ).join('')),
+          modules[datasource.module].template.search(/^( {6}|\t{3})file:/gm) === -1
+            && `      file: ${relative(modules[datasource.module].ts)}\n`,
+        ).filter(Boolean).join('')),
       // templates
       config.templates().length && `templates:\n`,
       config.templates()
