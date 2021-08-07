@@ -32,7 +32,7 @@ class Subgraph {
       // datasources
       config.datasources().length && `dataSources:\n`,
       config.datasources()
-        .flatMap(datasource => [].concat(datasource.module).map(module => Object.assign({}, datasource, { module })))
+        .flatMap(datasource => [].concat(datasource.module ?? []).map(module => Object.assign({}, datasource, { module })))
         .map((datasource, i, array) => Object.assign(
           {},
           config._argv,
