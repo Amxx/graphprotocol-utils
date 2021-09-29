@@ -1,6 +1,6 @@
 {
 	"name": "@amxx/graphprotocol-utils",
-	"version": "1.0.0-alpha.12",
+	"version": "1.1.0-alpha.0",
 	"description": "Tooling for graphprotocol subgraph construction",
 	"author": "Hadrien Croubois (@Amxx)",
 	"license": "MIT",
@@ -24,10 +24,10 @@
 		"test": "graph build testing/subgraph.yaml"
 	},
 	"dependencies": {
-		"@graphprotocol/graph-ts": "^0.20.0",
-		"yargs": "^17.0.1"
+		"@graphprotocol/graph-ts": "^0.22.1",
+		"yargs": "^17.2.1"
 	},
 	"devDependencies": {
-		"@graphprotocol/graph-cli": "^0.20.0"
+		"@graphprotocol/graph-cli": "^0.22.1"
 	}
 }

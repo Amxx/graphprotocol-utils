@@ -30,8 +30,8 @@ export class String2 {
 
 	set(value: string): void {
 		this.load()
-		this._buffer.value = value;
-		this._buffer.save();
+		this._buffer!.value = value;
+		this._buffer!.save();
 	}
 
 	del(): void {
