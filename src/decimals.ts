@@ -23,7 +23,7 @@ export namespace decimals {
 	}
 
 	export class Value {
-		_entry: DecimalValue
+		_entry!: DecimalValue;
 
 		constructor(id: string, decimal: i32 = decimals.DEFAULT_DECIMALS) {
 			let entry = DecimalValue.load(id)
@@ -33,7 +33,7 @@ export namespace decimals {
 				this._entry.decimals = decimal
 				this._update()
 			} else {
-				this._entry = entry as DecimalValue
+				this._entry = entry
 			}
 		}
 

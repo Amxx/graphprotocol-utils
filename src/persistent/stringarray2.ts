@@ -20,24 +20,24 @@ export class StringArray2 {
 		this._buffer = PersistentStringArray.load(this._id);
 		if (this._buffer) return this._buffer;
 		this._buffer = new PersistentStringArray(this._id);
-		this._buffer.values = [];
+		this._buffer!.values = [];
 		return this._buffer;
 	}
 
 	pushBack(value: string) : void {
 		this.load()
-		let array = this._buffer.values
+		let array = this._buffer!.values
 		array.push(value)
-		this._buffer.values = array
-		this._buffer.save()
+		this._buffer!.values = array
+		this._buffer!.save()
 	}
 
 	pushFront(value: string) : void {
 		this.load()
-		let array = this._buffer.values
+		let array = this._buffer!.values
 		array.unshift(value)
-		this._buffer.values = array
-		this._buffer.save()
+		this._buffer!.values = array
+		this._buffer!.save()
 	}
 
 	popBack() : string {

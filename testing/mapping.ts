@@ -18,7 +18,7 @@ import {
 export function handleNewContract(ev: NewContractEvent): void {
 	let tx   = transactions.log(ev);
 	let id   = events.id(ev);
-	let fees = decimals.toDecimals(ev.transaction.gasPrice*ev.transaction.gasUsed)
+	let fees = decimals.toDecimals(ev.transaction.gasPrice.times(ev.transaction.gasLimit))
 	log.warning("tx: {}, id: {}, fees: {}", [ tx.id, id, fees.toString() ])
 
 	let i = constants.BIGINT_ONE
