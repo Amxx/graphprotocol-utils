@@ -3,6 +3,7 @@
   "abstract": true,
   "fields": [
     { "name": "transaction", "type": "Transaction!" },
+    { "name": "emitter",     "type": "Account!"     },
     { "name": "timestamp",   "type": "BigInt!"      }
   ]
 }]

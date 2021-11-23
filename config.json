@@ -3,6 +3,7 @@
   "datasources": [
     {
       "module": [
+        "account",
         "decimals",
         "events",
         "transactions",

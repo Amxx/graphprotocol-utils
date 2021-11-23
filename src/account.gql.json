@@ -1,0 +1,7 @@
+[{
+  "name": "Account",
+  "abstract": true,
+  "fields": [
+    { "name": "events", "type": "Event!", "derived": "emitter" }
+  ]
+}]

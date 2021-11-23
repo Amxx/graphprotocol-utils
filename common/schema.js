@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = [
+  '../src/account.gql.json',
   '../src/decimals.gql.json',
   '../src/events.gql.json',
   '../src/transactions.gql.json',
