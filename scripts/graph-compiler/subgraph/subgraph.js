@@ -39,7 +39,7 @@ class Subgraph {
           config._cfg,
           {
             id:   array.findIndex(({ module }) => module === datasource.module) === i ? datasource.module : `${datasource.module}-${i}`,
-            root: relative('.'),
+            root: relative(config.root()),
             file: relative(modules[datasource.module].ts),
           },
           datasource,
@@ -60,7 +60,7 @@ class Subgraph {
           config._cfg,
           {
             id:   template,
-            root: relative('.'),
+            root: relative(config.root()),
           },
         ))
         .map(template => [].concat(
