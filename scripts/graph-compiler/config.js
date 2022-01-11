@@ -3,7 +3,7 @@ const path = require('path');
 class Config {
   constructor(argv) {
     module.paths.unshift(
-      path.resolve(argv.root),
+      path.resolve('.'),
       ...argv.include.map(folder => path.resolve(folder))
     );
 
