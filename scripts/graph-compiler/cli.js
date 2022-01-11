@@ -13,6 +13,7 @@ const argv = require('yargs')
   .option('include',         { type: 'array',   default: []                                           })
   .option('export-schema',   { type: 'boolean', default: false                                        })
   .option('export-subgraph', { type: 'boolean', default: false                                        })
+  .option('root',            { type: 'string',  default: '.' })
   .argv;
 
 const config = new Config(argv);

@@ -24,6 +24,10 @@ class Config {
     return this._cfg.datasources.flatMap(({ templates }) => templates).filter(Boolean).unique();
   }
 
+  root() {
+    return this._argv.root;
+  }
+
   schemaPath()   { return `${this._cfg.output}schema.graphql`; }
   subgraphPath() { return `${this._cfg.output}subgraph.yaml`;  }
 }
