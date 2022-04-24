@@ -28,7 +28,7 @@
 		"yargs": "^17.2.1"
 	},
 	"devDependencies": {
-		"@graphprotocol/graph-cli": "^0.26.0"
+		"@graphprotocol/graph-cli": "^0.29.0"
 	},
 	"engines": {
 		"node" : ">=0.12"
