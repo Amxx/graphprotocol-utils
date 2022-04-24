@@ -24,11 +24,11 @@
 		"test": "graph build testing/subgraph.yaml"
 	},
 	"dependencies": {
-		"@graphprotocol/graph-ts": "^0.24.0",
+		"@graphprotocol/graph-ts": "^0.26.0",
 		"yargs": "^17.2.1"
 	},
 	"devDependencies": {
-		"@graphprotocol/graph-cli": "^0.24.0"
+		"@graphprotocol/graph-cli": "^0.26.0"
 	},
 	"engines": {
 		"node" : ">=0.12"
