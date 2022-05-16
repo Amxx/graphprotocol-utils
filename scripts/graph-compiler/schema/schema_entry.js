@@ -55,7 +55,7 @@ class SchemaEntry {
         `Error merging schema entries: name do not match (${e1.name} / ${e2.name})`,
       );
       assert(
-        e1.implements === e2.implements,
+        e1.parent === e2.parent,
         `Error merging schema entries: inheritance do not match for ${e1.name}`,
       );
       assert(
@@ -69,7 +69,7 @@ class SchemaEntry {
 
       return SchemaEntry.from({
         name:       e1.name,
-        implements: e1.implements,
+        parent:     e1.parent,
         fields:     [].concat(e1.fields, e2.fields).unique(({ name }) => name),
         enums:      [].concat(e1.enums,  e2.enums).unique(),
       });
