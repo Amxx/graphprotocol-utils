@@ -1,5 +1,6 @@
 [{
   "name": "Transaction",
+  "immutable": true,
   "fields": [
     { "name": "timestamp",   "type": "BigInt!"                          },
     { "name": "blockNumber", "type": "BigInt!"                          },
