@@ -1,5 +1,5 @@
 class SchemaEntryField {
-  constructor({ name = 'id', type = 'ID!', derived = null } = {}) {
+  constructor({ name = 'id', type = 'Bytes!', derived = null } = {}) {
     this.name    = name;
     this.type    = type;
     this.derived = derived;
