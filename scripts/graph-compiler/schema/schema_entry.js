@@ -3,19 +3,20 @@ const { assert } = require('../utils');
 const SchemaEntryField = require('./schema_entry_field');
 
 class SchemaEntry {
-  constructor({ name, abstract = false, fields = [], enums = [], parent = null }) {
+  constructor({ name, abstract = false, immutable = false, fields = [], enums = [], parent = null }) {
     assert(
       enums.length == 0 || fields.length == 0,
       `Error loading schema entry ${name}: Entry contains both enums and fields`,
     );
-    this.name     = name;
-    this.abstract = abstract;
-    this.fields   = fields.map(SchemaEntryField.from);
-    this.enums    = enums;
-    this.parent   = parent;
+    this.name      = name;
+    this.abstract  = abstract;
+    this.immutable = immutable;
+    this.fields    = fields.map(SchemaEntryField.from);
+    this.enums     = enums;
+    this.parent    = parent;
 
     // add id field
-    if (this.enums.length == 0 && !this.fields.find(({ name, type }) => name === 'id' && type === 'ID!')) {
+    if (this.enums.length == 0 && !this.fields.find(({ name, type }) => name === 'id')) {
       this.fields.unshift(new SchemaEntryField());
     }
   }
@@ -24,20 +25,25 @@ class SchemaEntry {
     return [].concat(
       // entity header
       this.enums.length > 0
-      ? `enum ${this.name} {\n`
-      : this.abstract
-      ? `interface ${this.name} {\n`
-      : this.parent
-      ? `type ${this.name} implements ${this.parent} @entity {\n`
-      : `type ${this.name} @entity {\n`,
+        ? `enum ${this.name} {`
+        : this.abstract
+          ? `interface ${this.name} {`
+          : !this.parent
+            ? !this.immutable
+              ? `type ${this.name} @entity {`
+              : `type ${this.name} @entity(immutable: true) {`
+            : !this.immutable
+              ? `type ${this.name} implements ${this.parent} @entity {`
+              : `type ${this.name} implements ${this.parent} @entity(immutable: true) {`,
       // entities
       (
         this.enums.length == 0
         ? this.fields
         : this.enums
-      ).map(e => `\t${e}\n`),
-      `}\n`,
-    ).filter(Boolean).join('')
+      ).map(e => `\t${e}`),
+      `}`,
+      '',
+    ).join('\n')
   }
 
   static from(obj) {
@@ -55,7 +61,7 @@ class SchemaEntry {
         `Error merging schema entries: name do not match (${e1.name} / ${e2.name})`,
       );
       assert(
-        e1.implements === e2.implements,
+        !e1.parent || !e2.parent || e1.parent == e2.parent,
         `Error merging schema entries: inheritance do not match for ${e1.name}`,
       );
       assert(
@@ -68,10 +74,12 @@ class SchemaEntry {
       );
 
       return SchemaEntry.from({
-        name:       e1.name,
-        implements: e1.implements,
-        fields:     [].concat(e1.fields, e2.fields).unique(({ name }) => name),
-        enums:      [].concat(e1.enums,  e2.enums).unique(),
+        name:      e1.name,
+        abstract:  e1.abstract && e2.abstract,
+        immutable: e1.immutable && e2.immutable,
+        fields:    [].concat(e1.fields, e2.fields).unique(({ name }) => name),
+        enums:     [].concat(e1.enums,  e2.enums).unique(),
+        parent:    e1.parent || e2.parent,
       });
     }
   }

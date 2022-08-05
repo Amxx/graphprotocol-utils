@@ -1,7 +1,9 @@
 [{
   "name": "Account",
   "abstract": true,
+  "immutable": true,
   "fields": [
+    { "name": "id",     "type": "Bytes!"                       },
     { "name": "events", "type": "Event!", "derived": "emitter" }
   ]
 }]
