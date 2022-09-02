@@ -41,9 +41,9 @@ class SchemaEntry {
     ).join('\n')
   }
 
-  ensureId(e) {
+  static ensureId(e) {
     if (e.enums.length == 0 && !e.fields.find(({ name, type }) => name === 'id')) {
-      e.fields.unshift(new SchemaEntryField());
+      return e.fields.unshift(new SchemaEntryField());
     }
   }
 
@@ -53,9 +53,9 @@ class SchemaEntry {
 
   static merge(e1, e2) {
     if (Object.isEmpty(e1)) {
-      return ensureId(e2);
+      return e2;
     } else if (Object.isEmpty(e2)) {
-      return ensureId(e1);
+      return e1;
     } else {
       assert(
         e1.name === e2.name,
@@ -74,14 +74,14 @@ class SchemaEntry {
         `Error merging schema entries: incompatible fields found for ${e1.name}`,
       );
 
-      return ensureId(SchemaEntry.from({
+      return SchemaEntry.from({
         name:      e1.name,
         abstract:  e1.abstract && e2.abstract,
         immutable: e1.immutable && e2.immutable,
         fields:    [].concat(e1.fields, e2.fields).unique(({ name }) => name),
         enums:     [].concat(e1.enums,  e2.enums).unique(),
         parent:    e1.parent || e2.parent,
-      }));
+      });
     }
   }
 }
