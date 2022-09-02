@@ -1,9 +1,9 @@
 import {
-	ethereum
+	ethereum,
 } from '@graphprotocol/graph-ts'
 
 import {
-	Transaction
+	Transaction,
 } from '../generated/schema'
 
 export namespace transactions {

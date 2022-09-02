@@ -1,5 +1,5 @@
 import {
-	log
+	log,
 } from '@graphprotocol/graph-ts'
 
 import {
@@ -12,7 +12,7 @@ import {
 	events,
 	integers,
 	persistent,
-	transactions
+	transactions,
 } from '../src'
 
 export function handleNewContract(ev: NewContractEvent): void {
