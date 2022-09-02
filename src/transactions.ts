@@ -1,10 +1,10 @@
 import {
-	ethereum
-} from '@graphprotocol/graph-ts';
+	ethereum,
+} from '@graphprotocol/graph-ts'
 
 import {
-	Transaction
-} from '../generated/schema';
+	Transaction,
+} from '../generated/schema'
 
 export namespace transactions {
 	export function log(event: ethereum.Event): Transaction {

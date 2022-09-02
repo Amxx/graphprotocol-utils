@@ -1,10 +1,10 @@
 import {
-	log
-} from '@graphprotocol/graph-ts';
+	log,
+} from '@graphprotocol/graph-ts'
 
 import {
 	NewContract as NewContractEvent
-} from '../generated/GenericFactory/GenericFactory';
+} from '../generated/GenericFactory/GenericFactory'
 
 import {
 	constants,
@@ -12,8 +12,8 @@ import {
 	events,
 	integers,
 	persistent,
-	transactions
-} from '../src';
+	transactions,
+} from '../src'
 
 export function handleNewContract(ev: NewContractEvent): void {
 	let tx   = transactions.log(ev);
