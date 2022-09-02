@@ -1,10 +1,10 @@
 import {
-	log,
-} from '@graphprotocol/graph-ts'
+	log
+} from '@graphprotocol/graph-ts';
 
 import {
 	NewContract as NewContractEvent
-} from '../generated/GenericFactory/GenericFactory'
+} from '../generated/GenericFactory/GenericFactory';
 
 import {
 	constants,
@@ -12,14 +12,14 @@ import {
 	events,
 	integers,
 	persistent,
-	transactions,
-} from '../src'
+	transactions
+} from '../src';
 
 export function handleNewContract(ev: NewContractEvent): void {
 	let tx   = transactions.log(ev);
 	let id   = events.id(ev);
 	let fees = decimals.toDecimals(ev.transaction.gasPrice.times(ev.transaction.gasLimit))
-	log.warning("tx: {}, id: {}, fees: {}", [ tx.id.toString(), id, fees.toString() ])
+	log.warning("tx: {}, id: {}, fees: {}", [ tx.id, id, fees.toString() ])
 
 	let i = constants.BIGINT_ONE
 	i = integers.increment(i)

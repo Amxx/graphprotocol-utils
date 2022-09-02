@@ -1,14 +1,14 @@
 import {
-	ethereum,
-} from '@graphprotocol/graph-ts'
+	ethereum
+} from '@graphprotocol/graph-ts';
 
 import {
-	Transaction,
-} from '../generated/schema'
+	Transaction
+} from '../generated/schema';
 
 export namespace transactions {
 	export function log(event: ethereum.Event): Transaction {
-		let tx = new Transaction(event.transaction.hash)
+		let tx = new Transaction(event.transaction.hash.toHex())
 		tx.timestamp   = event.block.timestamp
 		tx.blockNumber = event.block.number
 		tx.save()
