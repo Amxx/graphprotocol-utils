@@ -43,8 +43,9 @@ class SchemaEntry {
 
   static ensureId(e) {
     if (e.enums.length == 0 && !e.fields.find(({ name, type }) => name === 'id')) {
-      return e.fields.unshift(new SchemaEntryField());
+      e.fields.unshift(new SchemaEntryField());
     }
+    return e;
   }
 
   static from(obj) {
