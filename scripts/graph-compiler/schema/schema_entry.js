@@ -14,11 +14,6 @@ class SchemaEntry {
     this.fields    = fields.map(SchemaEntryField.from);
     this.enums     = enums;
     this.parent    = parent;
-
-    // add id field
-    if (this.enums.length == 0 && !this.fields.find(({ name, type }) => name === 'id')) {
-      this.fields.unshift(new SchemaEntryField());
-    }
   }
 
   toString() {
@@ -44,6 +39,13 @@ class SchemaEntry {
       `}`,
       '',
     ).join('\n')
+  }
+
+  static ensureId(e) {
+    if (e.enums.length == 0 && !e.fields.some(field => field.name === 'id')) {
+      e.fields.unshift(new SchemaEntryField());
+    }
+    return e;
   }
 
   static from(obj) {

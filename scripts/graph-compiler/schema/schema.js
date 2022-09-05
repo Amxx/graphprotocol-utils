@@ -18,7 +18,8 @@ class Schema extends Array {
       this
         .map(({ name }) => name)
         .unique()
-        .map(name => this.filter(entry => name === entry.name).reduce(SchemaEntry.merge, {})),
+        .map(name => this.filter(entry => name === entry.name).reduce(SchemaEntry.merge, {}))
+        .map(entry => SchemaEntry.ensureId(entry)),
     );
   }
 
