@@ -42,7 +42,7 @@ class SchemaEntry {
   }
 
   static ensureId(e) {
-    if (e.enums.length == 0 && !e.fields.some(({ name }) => name === 'id')) {
+    if (e.enums.length == 0 && !e.fields.some(entry => entry.name === 'id')) {
       e.fields.unshift(new SchemaEntryField());
     }
     return e;
