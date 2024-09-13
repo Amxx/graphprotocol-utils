@@ -4,7 +4,7 @@ const { readFile } = require('../utils');
 
 class Subgraph {
   static fromConfig(config) {
-    const relative = (file) => path.relative(path.dirname(config.subgraphPath()), file);
+    const relative = (file) => path.relative(path.dirname(config.subgraphPath()), file) || '.';
     const modules  = Object.fromEntries(
       config.modules()
       .map(module => {
